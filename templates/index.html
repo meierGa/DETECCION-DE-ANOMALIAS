@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/index.css') }}">
+    <title>Detección de Anomalías</title>
+</head>
+<body>
+    <h1>Detección de Anomalías en Montos a Retirar</h1>
+
+    <!-- Formulario para insertar nuevos montos -->
+    <form method="POST">
+        <label for="monto">Ingrese un monto a retirar:</label>
+        <input type="number" id="monto" name="monto" required>
+        <button type="submit">Agregar Monto</button>
+    </form>
+
+    <h2>Gráfico de Montos</h2>
+    {% if plot_url %}
+        <img src="data:image/png;base64,{{ plot_url }}" alt="Gráfico de Anomalías">
+    {% else %}
+        <p>No hay datos para mostrar el gráfico.</p>
+    {% endif %}
+
+    <h2>Resultados</h2>
+    <div class="results">{{ df|safe }}</div>
+</body>
+</html>
